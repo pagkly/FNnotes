@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title ng-bind="$state.title"></title>
+
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      outline: none;
+    }
+
+    .fii-splash {
+      height: 100vh;
+      width: 100%;
+      font-family: Microsoft Yahei, Arial, sans-serif;
+      color: #333;
+    }
+    .fii-splash-loading {
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -45px;
+      margin-top: -45px;
+      width: 90px;
+      height: 90px;
+      -webkit-animation: rotate 2.0s infinite linear;
+      animation: rotate 2.0s infinite linear;
+    }
+
+    .fii-splash-loading .dot1, .fii-splash-loading .dot2 {
+      width: 60%;
+      height: 60%;
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      background-color: #349fff;
+      border-radius: 100%;
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+      -webkit-animation: bounce 2.0s infinite ease-in-out;
+      animation: bounce 2.0s infinite ease-in-out;
+    }
+
+    .fii-splash-loading .dot1 {
+      -webkit-animation-delay: 1.0s;
+      animation-delay: 1.0s;
+    }
+
+    .fii-splash-loading .dot2 {
+      top: auto;
+      bottom: 0;
+      -webkit-animation-delay: 2.0s;
+      animation-delay: 2.0s;
+    }
+
+    @-webkit-keyframes rotate { 100% { -webkit-transform: rotate(360deg) }}
+    @keyframes rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+    @-webkit-keyframes bounce {
+      0%, 100% { -webkit-transform: scale(0.0) }
+      50% { -webkit-transform: scale(1.0) }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+      }
+      50% {
+          transform: scale(1.0);
+          -webkit-transform: scale(1.0);
+      }
+    }
+
+  </style>
+</head>
+<body>
+<div ui-view class="fii-body" ng-class="$state.name ? 'fii-body-' + $state.name : ''">
+  <div class="fii-splash">
+    <div class="fii-splash-loading">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  window.prices_cn = {
+    L1: [31, 62, 88],
+    L2: [223, 446, 666],
+    L3: [613, 1200, 1800]
+  };
+  window.prices = {
+    L1: [1, 6],
+    L2: [4, 36],
+    L3: [9, 99]
+  };
+  window.FiiVersion = 201702127;
+  window.downloads = {
+    'apk': 'https://play.google.com/store/apps/details?id=com.fiistudio.fiinote',
+    'pc': '/pub/appdownload.jsp?os=2',
+  };
+  window.defaultLocale = 'en';
+  window.netErrors = {
+    'en': 'Network Error. Please try reload webpage.',
+    'de': 'Network Error. Please try reload webpage',
+    'es': 'Network Error. Please try reload webpage',
+    'fr': 'Network Error. Please try reload webpage',
+    'it': 'Network Error. Please try reload webpage',
+    'pt': 'Network Error. Please try reload webpage',
+    'ru': 'Network Error. Please try reload webpage',
+    'zh-CN': '出现网络错误，请刷新网页重试！',
+    'zh-TW': '出现网络错误，请刷新网页重试！',
+    'ja': 'Network Error. Please try reload webpage',
+    'ko': 'Network Error. Please try reload webpage'
+  };
+  window.locales = {
+    'en': 'English',
+    'de': 'Deutsch',
+    'es': 'Español (España)',
+    'fr': 'Français',
+    'it': 'Italiano',
+    'pt': 'Português (Brasil)',
+    'ru': 'Pусский',
+    'zh-CN': '中文(简体)',
+    'zh-TW': '中文(繁體)',
+    'ja': '日本語',
+    'ko': '한국어'
+  };
+  window.cloudSdks = {
+    'guide': '/download/cloud_guide_$1.pdf', // $1 = en
+    'Google App Engine': {
+      '.zip': ['/download/gae20160108.zip', '07b35285c0db66ec53cb12f0844a6f2c', '41cf0c128d72189507a7a221f883c6f02046af88'],
+      '.tgz': ['/download/gae20160108.tar.gz', 'd9fa813c3cee73e43a83266525d5e824', 'e5eb70f170e1098fdc2e68aea310f902ae426211'],
+      '.war': ['/download/gae20160108.war', '03fba5a5500a9b67aa82c0671928e3c8', '9a31f357d7a058a4409dd20b7f09e37d69d04ebf']
+    },
+    'Aliyun': {
+      '.zip': ['/download/ay20160108.zip', '9dd9830d8e35f4863953e6aa552a7b6d', 'e47a1d19b5afe2196c9320c44eb226015373d446'],
+      '.tgz': ['/download/ay20160108.tar.gz', 'c522231105f00f6f477f122a081f7ebb', 'a2d2c8db2bd087115e42c7ce733caa1de9d6b41e'],
+      '.war': ['/download/ay20160108.war', '3159c08fceb981088855a9588869aef4', '065da2a384d7fcc03cf8af2396e8e995452ab3b8']
+    },
+    'Java-based': {
+      '.zip': ['/download/jy20160108.zip', '9fe5b83be651f9c71d8ba0bd2be0f2f6', 'f14e46e20c9cf99a98a062ae41d6187757ade83b'],
+      '.tgz': ['/download/jy20160108.tar.gz', 'e8821e2853c717dbc87083a75483b8db', '209b7d21cdd244f11fd4ee0e21041839704a6331'],
+      '.war': ['/download/jy20160108.war', '9983739a70eecd4429cb0f925510f6f6', '59a8b1efa2798cfbf0c34750c985e8ccc56fdb87']
+    }
+  };
+  window.products = {
+    android: {
+      title: 'Android 2.3 ~ Android 9.0',
+      version: '11.2.1, Jun. 30, 2018',
+      changeLog: '/changelog.jsp?os=0',
+      download: 'https://play.google.com/store/apps/details?id=com.fiistudio.fiinote'
+    },
+    android_suibi: {
+      title: 'Android 2.3 ~ Android 9.0',
+      version: '11.2.1, Jun. 30, 2018',
+      changeLog: '/changelog.jsp?os=0',
+      download: 'https://play.google.com/store/apps/details?id=com.suishouxie.freenote'
+    },
+    pc: {
+      title: 'Windows XP, Windows Vista, Windows 7, Windows 8, Windows 8.1, Windows 10',
+      version: '1.5.5.2, Jul. 4, 2018',
+      changeLog: '/changelog.jsp?os=1',
+      download: '/pub/appdownload.jsp?os=2'
+    },
+    wine: {
+      title: 'MacOS, Linux',
+      version: '1.5.5.2, Jul. 4, 2018',
+      changeLog: '/changelog.jsp?os=1',
+      download: 'https://www.suishouxie.com/FiiNote4Wine.zip?201702129'
+    },
+    html5: {
+      title: 'IE11, Chrome, Safari, Firefox',
+      version: '1.0.5'
+    }
+  };
+
+  (function() {
+    var preWidth = document.body.clientWidth;
+    var bound = 810;
+    window.addEventListener('resize', function() {
+      var curWidth = document.body.clientWidth;
+      if ((preWidth < bound && curWidth >= bound) || (preWidth > bound && curWidth <= bound)) {
+        location.reload();
+      } else {
+        preWidth = curWidth;
+      }
+    });
+  })();
+</script>
+<script type="text/javascript" src="lib/angular.min.js"></script>
+<script type="text/javascript" src="lib/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="lib/angular-utf8-base64.min.js"></script>
+<script type="text/javascript" src="lib/angular-cookies.min.js"></script>
+<script type="text/javascript">
+  (function() {
+	  
+	    var device = document.body.clientWidth < 810 ? 'mobile' : 'desktop';
+	  
+    window.app = angular.module('Fii', ['ui.router', 'ngCookies', 'ab-base64']);
+    window.config = {
+      imageBase: 'resource/home/images',
+      localeBase: 'resource/home/_locales',
+      styleBase: 'app',
+      scriptBase: 'app',
+      styles: [
+	  
+	  	'fiinote.' + device + '.min.css'
+	  	
+      ],
+      scripts: [
+        'fiinote.' + device + '.min.js',
+        'fiinote.' + device + '.template.min.js'
+      ]
+    };
+  })();
+
+</script>
+<script type="text/javascript" src="app/loader.min.js?v=201702127"></script>
+</body>
+</html>
