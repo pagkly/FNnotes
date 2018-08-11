@@ -4,4 +4,5 @@ set "githubdir="%USERPROFILE%\Documents\Github\FNnotes\@pagkly"
 if exist %fnnotesdir% (
 move %fnnotesdir% %fnnotesdir%old
 )
-mklink /d %githubdir% %fnnotesdir% 
+REM mkdir %fnnotesdir%
+mklink /d %fnnotesdir% %githubdir%
